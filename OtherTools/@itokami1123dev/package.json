@@ -1,0 +1,11 @@
+{
+  "name": "poi-poi-lt",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server"
+  },
+  "devDependencies": {
+    "live-server": "^1.1.0"
+  }
+}
