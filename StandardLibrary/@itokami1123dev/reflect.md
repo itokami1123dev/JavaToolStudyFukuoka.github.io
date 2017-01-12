@@ -30,6 +30,8 @@ ____
 
 ## デモ
 
+mvn archetype:generate -DarchetypeGroupId=pl.org.miki -DarchetypeArtifactId=java8-quickstart-archetype -DinteractiveMode=false -DgroupId=com.example.reflt -DartifactId=reflt
+
 [demo](index.html)
 
 ____
