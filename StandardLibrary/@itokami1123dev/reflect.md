@@ -13,7 +13,7 @@ ____
 福岡ITを盛り上げたいと思っています。
 
 ____
-## java.lang.reflect 
+## java.lang.reflect
 
 - クラスとオブジェクトに関するリフレクト情報を取得するための、クラスとインタフェースを提供します。
 
@@ -25,9 +25,43 @@ _- - -_
 - パッケージ java.lang.reflect
   http://docs.oracle.com/javase/jp/8/docs/api/java/lang/reflect/package-summary.html
 
+____
+## 文字列からクラスを取得してインスタンスを生成
+
+```java
+public class Hoge {
+    public static String TEISU = "定数だよ";
+    public String call(){
+        return String.format("%s をよんだよ",this.getClass().getName());
+    }
+}
+```
+
+```java
+try {
+    Class clazz = Class.forName("com.example.reflt.Hoge");
+    Hoge hoge = (Hoge)clazz.newInstance();
+    System.out.printf("[%s]#call [%s]", clazz.getName(),hoge.call());
+} catch (ClassNotFoundException e) {
+    e.printStackTrace();
+} catch (InstantiationException e) {
+    e.printStackTrace();
+} catch (IllegalAccessException e) {
+    e.printStackTrace();
+}
+```
+_- - -_
+
+```
+[com.example.reflt.Hoge]#call [com.example.reflt.Hoge をよんだよ]
+```
+newInstance()でコンストラクタを呼んでいる
+
 
 ____
+## 文字列からメソッドを取得して実行
 
+____
 ## デモ
 
 mvn archetype:generate -DarchetypeGroupId=pl.org.miki -DarchetypeArtifactId=java8-quickstart-archetype -DinteractiveMode=false -DgroupId=com.example.reflt -DartifactId=reflt
