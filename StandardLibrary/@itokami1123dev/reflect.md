@@ -25,6 +25,9 @@ _- - -_
 - パッケージ java.lang.reflect
   http://docs.oracle.com/javase/jp/8/docs/api/java/lang/reflect/package-summary.html
 
+- リフレクション
+  http://www.ne.jp/asahi/hishidama/home/tech/java/reflection.html
+
 ____
 ### 文字列からクラスを取得してインスタンスを生成
 
@@ -169,7 +172,56 @@ for (Field field : fields) {
 ```
 
 - getFieldsでpublicが取得される。
-- 親クラスの取得する
+- 親クラスのまで取得しちゃう
+
+_- - -_
+
+### 自分のクラスのフィールドだけ取得
+
+```java
+Field[] fieldsAll = clazz.getDeclaredFields();
+System.out.println("--自分のだけ--");
+for (Field field : fieldsAll) {
+    try {
+        int modifier = field.getModifiers();
+        if (Modifier.isPublic(modifier)) {
+            System.out.printf("[%s] = [%s] \n", field.getName(), field.get(doramon));
+        }
+    } catch (IllegalAccessException e) { // field.get(doramon)
+        e.printStackTrace();
+    }
+}
+```
+
+```
+[publicName] = [**publicName**] 
+```
+
+_- - -_
+
+```java
+for (Field field : fieldsAll) {
+    try {
+        int modifier = field.getModifiers();
+        field.setAccessible(true);
+        System.out.printf("[%s] = [%s] \n", field.getName(), field.get(doramon));
+    } catch (IllegalAccessException e) { // field.get(doramon)
+        e.printStackTrace();
+    }
+}
+```
+
+```
+--自分の全部--
+[defaultName] = [**defaultName**] 
+[privateName] = [**privateName**] 
+[protectedName] = [**protectedName**] 
+[publicName] = [**publicName**] 
+```
+
+
+http://docs.oracle.com/javase/jp/7/api/java/lang/ReflectiveOperationException.html
+ReflectiveOperationException
 
 ____
 ## デモ
