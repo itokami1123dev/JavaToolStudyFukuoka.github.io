@@ -18,4 +18,8 @@ public class Hoge {
     private String call3() {
         return String.format("%s private mothod", this.getClass().getName());
     }
+    
+    protected String call4() {
+        return String.format("%s protected mothod", this.getClass().getName());
+    }
 }
